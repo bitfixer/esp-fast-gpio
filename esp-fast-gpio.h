@@ -39,4 +39,13 @@ namespace EspFastGpio {
     inline uint32_t get(int pin) {
         return (*gpio_low_in >> pin) & 0x1;
     }
+
+    inline void writeByte(uint8_t byte, int offset) {
+        *gpio_low_set_reg = (uint32_t)byte << offset;
+        *gpio_low_clear_reg = (uint32_t)(~byte) << offset;
+    }
+
+    inline uint8_t readByte(int offset) {
+        return (uint8_t)(*gpio_low_in >> offset) & 0xFF;
+    }
 }
