@@ -24,8 +24,16 @@ namespace EspFastGpio {
         *gpio_low_enable_clear_reg = gpio_masks[pin];
     }
 
+    inline void setInputMask(uint32_t mask) {
+        *gpio_low_enable_clear_reg = mask;
+    }
+
     inline void setOutput(int pin) {
         *gpio_low_enable_set_reg = gpio_masks[pin];
+    }
+
+    inline void setOutputMask(uint32_t mask) {
+        *gpio_low_enable_set_reg = mask;
     }
 
     inline void setHigh(int pin) {
