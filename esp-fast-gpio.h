@@ -16,6 +16,13 @@ namespace EspFastGpio {
     extern volatile uint32_t* gpio_low_enable_set_reg;
     extern volatile uint32_t* gpio_low_enable_clear_reg;
     extern volatile uint32_t* gpio_low_in;
+
+
+    extern volatile uint32_t* gpio_high_set_reg;
+    extern volatile uint32_t* gpio_high_clear_reg;
+    extern volatile uint32_t* gpio_high_enable_set_reg;
+    extern volatile uint32_t* gpio_high_enable_clear_reg;
+    extern volatile uint32_t* gpio_high_in;
     extern uint32_t gpio_masks[32];
 
     void init();
@@ -28,8 +35,16 @@ namespace EspFastGpio {
         *gpio_low_enable_clear_reg = mask;
     }
 
+    inline void setInputHigh(int pin) {
+        *gpio_high_enable_clear_reg = gpio_masks[pin];
+    }
+
     inline void setOutput(int pin) {
         *gpio_low_enable_set_reg = gpio_masks[pin];
+    }
+
+    inline void setOutputHigh(int pin) {
+        *gpio_high_enable_set_reg = gpio_masks[pin];
     }
 
     inline void setOutputMask(uint32_t mask) {
@@ -46,6 +61,10 @@ namespace EspFastGpio {
 
     inline uint32_t get(int pin) {
         return (*gpio_low_in >> pin) & 0x1;
+    }
+
+    inline uint32_t get_high(int pin) {
+        return (*gpio_high_in >> pin) & 0x1;
     }
 
     inline void writeByte(uint8_t byte, int offset) {
