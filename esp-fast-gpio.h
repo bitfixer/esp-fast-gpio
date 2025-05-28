@@ -72,14 +72,14 @@ namespace EspFastGpio {
         *gpio_low_clear_reg = (uint32_t)(~byte) << offset;
     }
 
-    inline void writeMask(uint32_t mask) {
-        *gpio_low_set_reg = mask;
-        *gpio_low_clear_reg = ~mask;
+    inline void writeMask(uint32_t val, uint32_t mask) {
+        *gpio_low_set_reg = val;
+        *gpio_low_clear_reg = (~val) & mask;
     }
 
-    inline void writeMaskHigh(uint32_t mask) {
-        *gpio_high_set_reg = mask;
-        *gpio_high_clear_reg = ~mask;
+    inline void writeMaskHigh(uint32_t val, uint32_t mask) {
+        *gpio_high_set_reg = val;
+        *gpio_high_clear_reg = (~val) & mask;
     }
 
     inline uint8_t readByte(int offset) {
