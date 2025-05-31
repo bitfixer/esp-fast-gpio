@@ -83,6 +83,9 @@ extern uint32_t gpio_masks[32];
 #define fast_gpio_read_mask_high() \
     (*gpio_high_in)
 
+#define fast_gpio_write(pin,val) \
+    gpio_set_level((gpio_num_t)pin, val)
+
 namespace EspFastGpio {
 
     void init();
