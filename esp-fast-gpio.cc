@@ -1,7 +1,5 @@
 #include "esp-fast-gpio.h"
 
-namespace EspFastGpio {
-
 gpio_hal_context_t _gpio_hal = {
     .dev = GPIO_HAL_GET_HW(GPIO_PORT_0)
 };
@@ -21,6 +19,8 @@ volatile uint32_t* gpio_high_enable_clear_reg = &(dev->enable1_w1tc.val);
 volatile uint32_t* gpio_high_in = &(dev->in1.val);
 
 uint32_t gpio_masks[32];
+
+namespace EspFastGpio {
 
 void init() {
     // initialize gpio masks
