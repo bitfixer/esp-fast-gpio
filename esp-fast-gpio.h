@@ -47,8 +47,7 @@ extern uint32_t gpio_masks[32];
 #define fast_gpio_set_output_mask_high(mask) \
     (*gpio_high_enable_set_reg = (mask))
 
-//#ifdef CONFIG_IDF_TARGET_ESP32
-#if 1
+#ifdef CONFIG_IDF_TARGET_ESP32
 #define fast_gpio_set_high(pin) \
     (*gpio_low_set_reg = gpio_masks[(pin)])
 
@@ -74,9 +73,7 @@ extern uint32_t gpio_masks[32];
     gpio_get_level((gpio_num_t)pin)
 
 #endif
-
-
-
+    
 #define fast_gpio_write_byte(byte, offset) {                        \
     *gpio_low_set_reg = ((uint32_t)(byte)) << (offset);            \
     *gpio_low_clear_reg = ((uint32_t)(~(byte))) << (offset);       \
