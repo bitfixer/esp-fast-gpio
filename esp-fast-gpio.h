@@ -53,6 +53,9 @@ extern uint32_t gpio_masks[32];
 #define fast_gpio_set_low(pin) \
     gpio_set_level((gpio_num_t)pin, 0)
 
+#define fast_gpio_set_low_mask(mask) \
+    *gpio_low_clear_reg = mask
+
 #define fast_gpio_get(pin) \
     gpio_get_level((gpio_num_t)pin)
 
